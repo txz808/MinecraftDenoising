@@ -3,7 +3,7 @@ import numpy as np
 import random
 
 
-def add_colored_salt_and_pepper_noise(image, color, amount=0.01):
+def add_colored_salt_and_pepper_noise(image, color, amount=0.05):
     """
     Add colored salt-and-pepper noise to an image.
     

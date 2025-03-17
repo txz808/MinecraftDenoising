@@ -1,0 +1,106 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #3E7C17; /* Minecraft grass green */
+    color: #FFFFFF;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    background: #6A4C31; /* Minecraft dirt brown */
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.4);
+    border: 5px solid #4F3724; /* Darker brown border */
+}
+
+h2 {
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #D3D3A2; /* Light yellow/gold */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.controls {
+    margin-top: 20px;
+}
+
+input[type="file"], select, button {
+    padding: 12px;
+    margin: 10px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+    transition: 0.3s;
+}
+
+input[type="file"] {
+    background: #4F3724; /* Dark brown */
+    color: white;
+    cursor: pointer;
+    border: 2px solid #D3D3A2;
+}
+
+select {
+    background: #D3D3A2; /* Light yellow */
+    color: #3E7C17;
+    font-weight: bold;
+    border: 2px solid #4F3724;
+}
+
+button {
+    background: #3E7C17; /* Minecraft green */
+    color: #FFFFFF;
+    font-weight: bold;
+    cursor: pointer;
+    border: 2px solid #D3D3A2;
+}
+
+button:hover {
+    background: #2E5E10;
+    transform: scale(1.05);
+}
+
+.image-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.image-box {
+    text-align: center;
+    background: #4F3724; /* Dark brown for contrast */
+    padding: 10px;
+    border-radius: 10px;
+    border: 3px solid #D3D3A2;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.image-box h3 {
+    font-weight: 400;
+    margin-bottom: 5px;
+    color: #D3D3A2;
+}
+
+.image-box img {
+    width: 200px; /* Reduced size for better visibility */
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.4);
+    border: 2px solid #D3D3A2;
+}
+
+@media (max-width: 768px) {
+    .image-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .image-box img {
+        width: 90%;
+    }
+}
