@@ -1,20 +1,52 @@
 import cv2
 import numpy as np
+import random
+
+
+def add_colored_salt_and_pepper_noise(image, color, amount=0.01):
+    """
+    Add colored salt-and-pepper noise to an image.
+    
+    :param image: Input image (H, W, C)
+    :param color: Color of the noise (e.g., 'red', 'green', 'blue', 'purple', etc.)
+    :param amount: Proportion of pixels to be affected by noise
+    :return: Noisy image
+    """
+    noisy_image = image.copy()
+    h, w, c = image.shape
+    num_pixels = int(amount * h * w)
+
+    # Define color mapping
+    color_map = {
+        'red': (0, 0, 255),
+        'green': (0, 255, 0),
+        'blue': (255, 0, 0),
+        'purple': (255, 0, 255),
+        'yellow': (0, 255, 255),
+        'cyan': (255, 255, 0),
+        'white': (255, 255, 255),
+        'black': (0, 0, 0)
+    }
+
+    if color not in color_map:
+        raise ValueError(f"Unsupported color '{color}'. Supported colors: {list(color_map.keys())}")
+
+    noise_color = color_map[color]
+
+    # Add salt noise
+    for _ in range(num_pixels // 2):
+        x, y = random.randint(0, w - 1), random.randint(0, h - 1)
+        noisy_image[y, x] = noise_color
+
+    # Add pepper noise (black pixels)
+    for _ in range(num_pixels // 2):
+        x, y = random.randint(0, w - 1), random.randint(0, h - 1)
+        noisy_image[y, x] = (0, 0, 0)
+
+    return noisy_image
 
 
 def denoise_image(image, threshold_value=185, morph_kernel_size=(3, 3), adaptive=True):
-    """
-    Denoises an image using segmentation, region-based filtering, and morphological operations.
-    
-    Parameters:
-        image (np.array): Input noisy image.
-        threshold_value (int, optional): Threshold for segmentation. If None, auto-detect using Otsu.
-        morph_kernel_size (tuple): Kernel size for morphological operations.
-        adaptive (bool): If True, dynamically calculates threshold instead of using a fixed one.
-    
-    Returns:
-        np.array: Denoised image.
-    """
     # Normalize to [0, 1] range
     image = image.astype(np.float32) / 255.0
 
@@ -61,12 +93,14 @@ def denoise_image(image, threshold_value=185, morph_kernel_size=(3, 3), adaptive
     return np.uint8(np.clip(denoised_image * 255, 0, 255))
 
 
-
 # Function to process the image
-def process_image(input_path, output_path):
+def process_image(input_path, output_path, noise_color=None, noise_amount=0.01):
     image = cv2.imread(input_path)
     if image is None:
         return
-    
+
+    if noise_color:
+        image = add_colored_salt_and_pepper_noise(image, noise_color, noise_amount)
+
     image = denoise_image(image)
     cv2.imwrite(output_path, image)
