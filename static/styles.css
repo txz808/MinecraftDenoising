@@ -104,3 +104,7 @@ button:hover {
         width: 90%;
     }
 }
+
+.hidden {
+    display: none;
+}

@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import random
 import os
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, url_for
 
 app = Flask(__name__)
 
@@ -78,6 +78,7 @@ def denoise_image(image, threshold_value=185, morph_kernel_size=(3, 3), adaptive
 def index():
     return render_template("index.html")
 
+
 @app.route("/upload", methods=["POST"])
 def upload():
     file = request.files["file"]
@@ -101,10 +102,11 @@ def upload():
         cv2.imwrite(noisy_path, noisy_image)
         cv2.imwrite(denoised_path, denoised_image)
 
+        # Use `url_for` to generate URLs for the images
         return jsonify({
-            "original": original_path,
-            "noisy": noisy_path,
-            "denoised": denoised_path
+            "original": url_for('static', filename=f'processed/original.jpg'),
+            "noisy": url_for('static', filename=f'processed/noisy.jpg'),
+            "denoised": url_for('static', filename=f'processed/denoised.jpg')
         })
 
 if __name__ == "__main__":
