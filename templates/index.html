@@ -55,19 +55,31 @@
                     processData: false,
                     contentType: false,
                     success: function(response) {
-                        // Update the image sources
-                        $("#original-img").attr("src", response.original);
-                        $("#noisy-img").attr("src", response.noisy);
-                        $("#denoised-img").attr("src", response.denoised);
+                        // Generate a unique timestamp to prevent caching
+                        const timestamp = new Date().getTime();
+    
+                        // Update the image sources with the timestamp
+                        $("#original-img").attr("src", response.original + "?t=" + timestamp);
+                        $("#noisy-img").attr("src", response.noisy + "?t=" + timestamp);
+                        $("#denoised-img").attr("src", response.denoised + "?t=" + timestamp);
     
                         // Update the download link for the denoised image
-                        $("#downloadLink").attr("href", response.denoised);
+                        $("#downloadLink").attr("href", response.denoised + "?t=" + timestamp);
                         $("#downloadLink").removeClass("hidden");
+    
+                        // Reset the form after successful upload
+                        $("#upload-form")[0].reset();
                     }
                 });
             });
+    
+            // Clear displayed images and download link when a new file is selected
+            $("#imageUpload").change(function() {
+                $("#original-img").attr("src", "").attr("alt", "Original Image");
+                $("#noisy-img").attr("src", "").attr("alt", "Noisy Image");
+                $("#denoised-img").attr("src", "").attr("alt", "Denoised Image");
+                $("#downloadLink").addClass("hidden");
+            });
         });
     </script>
-    <script src="{{ url_for('static', filename='main.js') }}"></script>
-</body>
 </html>
