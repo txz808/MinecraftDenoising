@@ -22,7 +22,7 @@ def resize_image(image, max_width=300):
     return image
 
 # Add colored salt-and-pepper noise
-def add_colored_salt_and_pepper_noise(image, color, amount=0.03, edge_weight=0.7):
+def add_colored_salt_and_pepper_noise(image, color, amount=0.03, edge_weight=0.7, gaussian_std = 10):
     noisy_image = image.copy()
     h, w, c = image.shape
     num_pixels = int(amount * h * w)
@@ -30,8 +30,22 @@ def add_colored_salt_and_pepper_noise(image, color, amount=0.03, edge_weight=0.7
     color_map = {
         'red': (0, 0, 255), 'green': (0, 255, 0), 'blue': (255, 0, 0),
         'purple': (255, 0, 255), 'yellow': (0, 255, 255), 'cyan': (255, 255, 0),
-        'white': (255, 255, 255), 'black': (0, 0, 0)
+        'white': (255, 255, 255), 'black': (0, 0, 0), 'orange': (0, 165, 255),
+        'pink': (147, 20, 255), 'brown': (19, 69, 139), 'gray': (128, 128, 128),
+        'light_blue': (255, 216, 0), 'lime': (50, 205, 50), 'magenta': (255, 0, 255),
+        'olive': (0, 128, 128), 'teal': (128, 128, 0), 'navy': (128, 0, 0),
+        'maroon': (0, 0, 128), 'silver': (192, 192, 192), 'gold': (0, 215, 255),
+        'sky_blue': (235, 206, 135), 'violet': (211, 0, 148), 'indigo': (130, 0, 75),
+        'turquoise': (208, 224, 64), 'tan': (140, 180, 210), 'beige': (220, 245, 245), 'salmon': (114, 128, 250), 'peach': (185, 218, 255), 'lavender': (250, 230, 230),
+        'coral': (130, 105, 240), 'khaki': (140, 230, 240), 'mauve': (212, 115, 212), 'crimson': (60, 20, 220), 'mint': (250, 255, 245), 'apricot': (177, 218, 244),
+        'navajo_white': (173, 222, 255), 'old_lace': (230, 245, 253), 'pale_goldenrod': (170, 232, 238), 'pale_green': (152, 251, 152), 'pale_turquoise': (238, 238, 175),
+        'papaya_whip': (213, 239, 255), 'peach_puff': (185, 218, 255), 'peru': (63, 133, 205), 'plum': (221, 160, 221), 'powder_blue': (230, 224, 176), 'rosy_brown': (143, 143, 188),
+        'saddle_brown': (19, 69, 139), 'sandy_brown': (96, 164, 244), 'sea_green': (87, 139, 46), 'seashell': (238, 245, 255), 'sienna': (45, 82, 160), 'sky_blue': (235, 206, 135),
+        'slate_blue': (205, 90, 106), 'slate_gray': (144, 128, 112), 'snow': (250, 250, 255), 'spring_green': (127, 255, 0), 'steel_blue': (180, 130, 70), 'tan': (140, 180, 210)
     }
+
+    if color == "random":
+        color = random.choice(list(color_map.keys()))
 
     noise_color = color_map.get(color, (255, 255, 255))
 
@@ -57,6 +71,10 @@ def add_colored_salt_and_pepper_noise(image, color, amount=0.03, edge_weight=0.7
     for _ in range(remaining_pixels // 2):
         x, y = random.randint(0, w - 1), random.randint(0, h - 1)
         noisy_image[y, x] = (0, 0, 0)
+    
+     # Add Gaussian noise
+    gaussian_noise = np.random.normal(0, gaussian_std, (h, w, c)).astype(np.int16)
+    noisy_image = np.clip(noisy_image + gaussian_noise, 0, 255).astype(np.uint8)
 
     return noisy_image
 
