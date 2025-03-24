@@ -6,6 +6,18 @@
     <title>Image Noise Processing</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        .color-options {
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 300px; /* Adjust as needed */
+        }
+        .color-option {
+            width: 33%; /* Adjust for number of columns */
+            padding: 2px;
+            box-sizing: border-box;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -16,14 +28,70 @@
             <br>
             <label>Select Noise Color:</label>
             <select id="colorSelect" name="color" title="Select a noise color">
-                <option value="red">Red</option>
-                <option value="green">Green</option>
-                <option value="blue">Blue</option>
-                <option value="purple">Purple</option>
-                <option value="yellow">Yellow</option>
-                <option value="cyan">Cyan</option>
-                <option value="white">White</option>
-                <option value="black">Black</option>
+                <option value="random">Random Color</option>
+                <optgroup label="Colors">
+                <div class="color-options">
+                    <option value="red" class="color-option">Red</option>
+                    <option value="green" class="color-option">Green</option>
+                    <option value="blue" class="color-option">Blue</option>
+                    <option value="purple" class="color-option">Purple</option>
+                    <option value="yellow" class="color-option">Yellow</option>
+                    <option value="cyan" class="color-option">Cyan</option>
+                    <option value="white" class="color-option">White</option>
+                    <option value="black" class="color-option">Black</option>
+                    <option value="pink" class="color-option">Pink</option>
+                    <option value="orange" class="color-option">Orange</option>
+                    <option value="brown" class="color-option">Brown</option>
+                    <option value="gray" class="color-option">Gray</option>
+                    <option value="light_blue" class="color-option">Light Blue</option>
+                    <option value="lime" class="color-option">Lime</option>
+                    <option value="magenta" class="color-option">Magenta</option>
+                    <option value="olive" class="color-option">Olive</option>
+                    <option value="teal" class="color-option">Teal</option>
+                    <option value="navy" class="color-option">Navy</option>
+                    <option value="maroon" class="color-option">Maroon</option>
+                    <option value="silver" class="color-option">Silver</option>
+                    <option value="gold" class="color-option">Gold</option>
+                    <option value="sky_blue" class="color-option">Sky Blue</option>
+                    <option value="violet" class="color-option">Violet</option>
+                    <option value="indigo" class="color-option">Indigo</option>
+                    <option value="turquoise" class="color-option">Turquoise</option>
+                    <option value="tan" class="color-option">Tan</option>
+                    <option value="beige" class="color-option">Beige</option>
+                    <option value="salmon" class="color-option">Salmon</option>
+                    <option value="peach" class="color-option">Peach</option>
+                    <option value="lavender" class="color-option">Lavender</option>
+                    <option value="coral" class="color-option">Coral</option>
+                    <option value="khaki" class="color-option">Khaki</option>
+                    <option value="mauve" class="color-option">Mauve</option>
+                    <option value="crimson" class="color-option">Crimson</option>
+                    <option value="mint" class="color-option">Mint</option>
+                    <option value="apricot" class="color-option">Apricot</option>
+                    <option value="navajo_white" class="color-option">Navajo White</option>
+                    <option value="old_lace" class="color-option">Old Lace</option>
+                    <option value="pale_goldenrod" class="color-option">Pale Goldenrod</option>
+                    <option value="pale_green" class="color-option">Pale Green</option>
+                    <option value="pale_turquoise" class="color-option">Pale Turquoise</option>
+                    <option value="papaya_whip" class="color-option">Papaya Whip</option>
+                    <option value="peach_puff" class="color-option">Peach Puff</option>
+                    <option value="peru" class="color-option">Peru</option>
+                    <option value="plum" class="color-option">Plum</option>
+                    <option value="powder_blue" class="color-option">Powder Blue</option>
+                    <option value="rosy_brown" class="color-option">Rosy Brown</option>
+                    <option value="saddle_brown" class="color-option">Saddle Brown</option>
+                    <option value="sandy_brown" class="color-option">Sandy Brown</option>
+                    <option value="sea_green" class="color-option">Sea Green</option>
+                    <option value="seashell" class="color-option">Seashell</option>
+                    <option value="sienna" class="color-option">Sienna</option>
+                    <option value="sky_blue" class="color-option">Sky Blue</option>
+                    <option value="slate_blue" class="color-option">Slate Blue</option>
+                    <option value="slate_gray" class="color-option">Slate Gray</option>
+                    <option value="snow" class="color-option">Snow</option>
+                    <option value="spring_green" class="color-option">Spring Green</option>
+                    <option value="steel_blue" class="color-option">Steel Blue</option>
+                    <option value="tan" class="color-option">Tan</option>
+                </div>
+                </optgroup>
             </select>
             <br>
             <label>Select Denoising Mode:</label>
